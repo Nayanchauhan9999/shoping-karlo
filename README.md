@@ -1,38 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🥼🛒 Shoping Karlo - Ecommerce-App.
 
-# Other third-party libraries used in this  project
+## Run Locally
 
-## 👉 Axios, Material UI, Material UI icons, Typescript,
-
-## Getting Started
-
-First, run the development server:
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  git clone https://github.com/Nayanchauhan9999/shoping-karlo.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd shoping-karlo
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
 
-## Learn More
+Install dependencies
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+  npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Start the server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+  npm run dev
+```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Environment Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To run this project, you will need to add the following environment variables to your .env.local file
+
+`API_LINK`
+
+## Authors
+
+- [@Nayanchauhan9999](https://github.com/Nayanchauhan9999)
+
+
+## Technologies used in this project
+
+ - [NextJs](https://nextjs.org/)
+ - [ReactJs](https://react.dev/)
+ - [Material UI](https://mui.com/material-ui/)
+ - [Node Js](https://nodejs.org/en)
+ - [Axios](https://axios-http.com/)
+
+
+## FAQ
+
+#### What is API_LINK?
+
+After clone this repository you have to create one .env.local file in your local system. API_LINK is api link url for making api calls with server. i use mongodb atlas for database and deploy on vercel. if you also want to use api created by me. add this in your .env.local file.
+
+```bash
+  API_LINK=https://ecommerce-backend-mauve.vercel.app/api/v1
+```
+
+#### Which nextjs roter is used?
+I use App router.
+
+## 🚀 About Me
+Hi, I'm Nayan Chauhan! 👋. A web developer...
+
+
+## 🛠 My Skills
+Javascript, HTML, CSS, ReactJS, NextJs, ExpressJs, MongooseJs, MongoDB, NodeJs, Typescript, Rest-Api, Styled-Components, Formik, React-hook-form, Redux, npm, Axios,Redux-toolkit, Git & GitHub, Bootstrap, TailwindCSS, Material UI.
+
+
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://nayan-chauhan-portfolio.vercel.app/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/chauhan-nayan)
