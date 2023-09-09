@@ -1,0 +1,12 @@
+This is information about project structure
+
+component folder have 3 main folders
+
+[1]. __Shared :
+__Shared will contain 100% reusable components like Modals,Buttons,inputField.
+
+[2]. Atoms : 
+suppose you need a button which not avilable or customizable of __shared folder then you can create button in Atoms folder. Atoms will contain small reusable components like inputField, Button, Badge etc.
+
+[3]. Molecule: 
+Molecule will contain Atoms with extra other components like Forms, button groups, cards etc.
