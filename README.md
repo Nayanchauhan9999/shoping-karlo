@@ -46,6 +46,7 @@ To run this project, you will need to add the following environment variables to
  - [Material UI](https://mui.com/material-ui/)
  - [Node Js](https://nodejs.org/en)
  - [Axios](https://axios-http.com/)
+ - [Redux-Toolkit](https://redux-toolkit.js.org/)
 
 
 ## FAQ

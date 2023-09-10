@@ -1,7 +1,11 @@
+"use client";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import "@/utils/styles/globals.css";
+import { Roboto } from "next/font/google";
+import { ThemeProvider } from "@emotion/react";
+import theme from "@/utils/Theme";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 
 export const metadata: Metadata = {
   title: "Shoping Karlo",
@@ -15,8 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ThemeProvider theme={theme}>
+      <html lang="en">
+        <body className={roboto.className}>{children}</body>
+      </html>
+    </ThemeProvider>
   );
 }

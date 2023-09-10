@@ -1,7 +1,10 @@
+"use client"
+import Navbar from "@/components/Molecules/Navbar";
+
 export default function Home() {
   return (
     <main>
-      <div>Hello friends, Shoping Karlo</div>
+      <Navbar/>
     </main>
   );
 }
