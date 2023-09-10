@@ -7,15 +7,22 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
+import MenuItem from "@/components/__Shared/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import {
+  PersonAdd,
+  Logout,
+  Settings,
+  ShoppingCart,
+  FavoriteBorder,
+  Notifications,
+  ShoppingBag,
+} from "@mui/icons-material";
+import Link from "@/components/__Shared/Link";
+import { Avatar, Divider, ListItemIcon, Tooltip } from "@mui/material";
+import SidebarList from "../Drawer";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,103 +66,117 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+  const [openSidebar, setOpenSidebar] = React.useState<boolean>(false);
+  const openMenu = Boolean(anchorEl);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const toggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+      setOpenSidebar(open);
+    };
+
+  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
+  const handleCloseMenu = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = "primary-search-account-menu";
   const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Sign In</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
+    <React.Fragment>
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={openMenu}
+        onClose={handleCloseMenu}
+        onClick={handleCloseMenu}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            mt: 1.5,
+            "& .MuiAvatar-root": {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            "&:before": {
+              content: '""',
+              display: "block",
+              position: "absolute",
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      >
+        <MenuItem onClick={handleCloseMenu}>
+          <Avatar /> Profile
+        </MenuItem>
+        <MenuItem onClick={handleCloseMenu}>
+          <Avatar /> My account
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={handleCloseMenu}>
+          <ListItemIcon>
+            <ShoppingBag fontSize="small" />
+          </ListItemIcon>
+          Orders
+        </MenuItem>
+        <MenuItem onClick={handleCloseMenu}>
+          <ListItemIcon>
+            <ShoppingCart fontSize="small" />
+          </ListItemIcon>
+          Cart
+        </MenuItem>
+        <MenuItem onClick={handleCloseMenu}>
+          <ListItemIcon>
+            <FavoriteBorder fontSize="small" />
+          </ListItemIcon>
+          Wishlist
+        </MenuItem>
+        <MenuItem onClick={handleCloseMenu}>
+          <ListItemIcon>
+            <Notifications fontSize="small" />
+          </ListItemIcon>
+          Notifications
+        </MenuItem>
+        <MenuItem onClick={handleCloseMenu}>
+          <ListItemIcon>
+            <PersonAdd fontSize="small" />
+          </ListItemIcon>
+          Add another account
+        </MenuItem>
+        <MenuItem onClick={handleCloseMenu}>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem onClick={handleCloseMenu}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
+    </React.Fragment>
   );
 
   return (
@@ -168,17 +189,20 @@ export default function Navbar() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={() => setOpenSidebar(true)}
           >
             <MenuIcon />
           </IconButton>
+
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            Shoping Karlo
+            <Link href="/">Shoping Karlo</Link>
           </Typography>
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -196,45 +220,47 @@ export default function Navbar() {
               color="inherit"
             >
               <Badge badgeContent={4} color="error">
-                <ShoppingCartIcon />
+                <ShoppingCart />
               </Badge>
             </IconButton>
-            {/* <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                textAlign: "center",
+              }}
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+              <Tooltip title="Account settings">
+                <IconButton
+                  onClick={handleOpenMenu}
+                  size="small"
+                  sx={{ ml: 2 }}
+                  aria-controls={openMenu ? "account-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={openMenu ? "true" : undefined}
+                >
+                  <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                </IconButton>
+              </Tooltip>
+            </Box>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
+            <Tooltip title="Account settings">
+              <IconButton
+                onClick={handleOpenMenu}
+                size="small"
+                sx={{ ml: 2 }}
+                aria-controls={openMenu ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={openMenu ? "true" : undefined}
+              >
+                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+              </IconButton>
+            </Tooltip>
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+      <SidebarList open={openSidebar} toggleDrawer={toggleDrawer(false)} />
       {renderMenu}
     </Box>
   );
