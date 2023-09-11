@@ -7,22 +7,14 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
-import MenuItem from "@/components/__Shared/MenuItem";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import {
-  PersonAdd,
-  Logout,
-  Settings,
-  ShoppingCart,
-  FavoriteBorder,
-  Notifications,
-  ShoppingBag,
-} from "@mui/icons-material";
+import { ShoppingCart } from "@mui/icons-material";
 import Link from "@/components/__Shared/Link";
-import { Avatar, Divider, ListItemIcon, Tooltip } from "@mui/material";
+import { Avatar, Tooltip } from "@mui/material";
 import SidebarList from "../Drawer";
+import NavbarLinks from "../NavbarLinks";
+import ChangeModeSwitch from "@/components/Atoms/ChangeModeSwitch";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -78,106 +70,8 @@ export default function Navbar() {
       ) {
         return;
       }
-
       setOpenSidebar(open);
     };
-
-  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
-
-  const renderMenu = (
-    <React.Fragment>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={openMenu}
-        onClose={handleCloseMenu}
-        onClick={handleCloseMenu}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-      >
-        <MenuItem onClick={handleCloseMenu}>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>
-          <Avatar /> My account
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleCloseMenu}>
-          <ListItemIcon>
-            <ShoppingBag fontSize="small" />
-          </ListItemIcon>
-          Orders
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>
-          <ListItemIcon>
-            <ShoppingCart fontSize="small" />
-          </ListItemIcon>
-          Cart
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>
-          <ListItemIcon>
-            <FavoriteBorder fontSize="small" />
-          </ListItemIcon>
-          Wishlist
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>
-          <ListItemIcon>
-            <Notifications fontSize="small" />
-          </ListItemIcon>
-          Notifications
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
-      </Menu>
-    </React.Fragment>
-  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -212,7 +106,9 @@ export default function Navbar() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
+
           <Box sx={{ flexGrow: 1 }} />
+          <ChangeModeSwitch />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
@@ -223,31 +119,13 @@ export default function Navbar() {
                 <ShoppingCart />
               </Badge>
             </IconButton>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                textAlign: "center",
-              }}
-            >
-              <Tooltip title="Account settings">
-                <IconButton
-                  onClick={handleOpenMenu}
-                  size="small"
-                  sx={{ ml: 2 }}
-                  aria-controls={openMenu ? "account-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={openMenu ? "true" : undefined}
-                >
-                  <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
-                </IconButton>
-              </Tooltip>
-            </Box>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ display: { xs: "flex" } }}>
             <Tooltip title="Account settings">
               <IconButton
-                onClick={handleOpenMenu}
+                onClick={(event: React.MouseEvent<HTMLElement>) =>
+                  setAnchorEl(event.currentTarget)
+                }
                 size="small"
                 sx={{ ml: 2 }}
                 aria-controls={openMenu ? "account-menu" : undefined}
@@ -261,7 +139,11 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
       <SidebarList open={openSidebar} toggleDrawer={toggleDrawer(false)} />
-      {renderMenu}
+      <NavbarLinks
+        anchorEl={anchorEl}
+        handleCloseMenu={() => setAnchorEl(null)}
+        openMenu={openMenu}
+      />
     </Box>
   );
 }

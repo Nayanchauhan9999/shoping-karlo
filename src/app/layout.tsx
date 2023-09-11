@@ -3,7 +3,11 @@
 import "@/utils/styles/globals.css";
 import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@emotion/react";
-import theme from "@/utils/Theme";
+import { lightTheme, darkTheme } from "@/utils/Theme";
+import store from "@/store";
+import { Provider } from "react-redux";
+import { useState } from "react";
+import { SetThemeContext,IsDarkTheme } from "@/utils/context";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 
@@ -18,11 +22,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
   return (
-    <ThemeProvider theme={theme}>
-      <html lang="en">
-        <body className={roboto.className}>{children}</body>
-      </html>
-    </ThemeProvider>
+    <Provider store={store}>
+      <SetThemeContext.Provider value={setIsDarkTheme}>
+        <IsDarkTheme.Provider value={isDarkTheme}>
+          <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+            <html lang="en">
+              <body className={roboto.className}>{children}</body>
+            </html>
+          </ThemeProvider>
+        </IsDarkTheme.Provider>
+      </SetThemeContext.Provider>
+    </Provider>
   );
 }

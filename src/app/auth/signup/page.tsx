@@ -1,9 +1,15 @@
-import React from 'react'
+import { Box } from "@mui/material";
+import React from "react";
+import { Security } from "@mui/icons-material";
 
 const SignUp = () => {
   return (
-    <div>SignUp</div>
-  )
-}
+    <React.Fragment>
+      <Box>
+        <Security />
+      </Box>
+    </React.Fragment>
+  );
+};
 
-export default SignUp
+export default SignUp;
