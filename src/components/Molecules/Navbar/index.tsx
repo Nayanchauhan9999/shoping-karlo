@@ -97,7 +97,7 @@ export default function Navbar() {
                   setCatDropdown(event.currentTarget);
                 }}
               >
-                <ArrowDropDown />
+                <ArrowDropDown color="primary"/>
               </IconButton>
               <CategoryDropdownList
                 openCategory={Boolean(catDropdown)}
@@ -156,20 +156,33 @@ export default function Navbar() {
               p: "1px",
               display: "flex",
               alignItems: "center",
-              width: { xs: "100%", sm: "80%", md: "65%" },
-              margin: "auto",
             }}
           >
-            <IconButton sx={{ p: "10px" }} aria-label="menu">
-              <MenuIcon />
+            <IconButton
+              sx={{ p: "8px" }}
+              aria-label="menu"
+              aria-controls={openCategory ? "long-menu" : undefined}
+              aria-expanded={openCategory ? "true" : undefined}
+              aria-haspopup="true"
+              onClick={(event: React.MouseEvent<HTMLElement>) => {
+                setCatDropdown(event.currentTarget);
+              }}
+            >
+              <ArrowDropDown color="primary" />
             </IconButton>
+            <CategoryDropdownList
+              openCategory={Boolean(catDropdown)}
+              anchorEl={catDropdown}
+              handleCloseMenu={() => setCatDropdown(null)}
+            />
+            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
             <InputBase
               sx={{ ml: 1, flex: 1 }}
               placeholder="Search Products"
               inputProps={{ "aria-label": "search google maps" }}
             />
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon />
+            <IconButton type="button" sx={{ p: "8px" }} aria-label="search">
+              <SearchIcon color="primary" />
             </IconButton>
           </Paper>
         </Toolbar>
