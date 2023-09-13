@@ -3,7 +3,7 @@ export {};
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      API_LINK: string;
+      NEXT_PUBLIC_API_LINK: string;
     }
   }
 }

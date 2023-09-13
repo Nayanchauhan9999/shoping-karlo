@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,7 +11,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   ArrowDropDown,
-  ArrowDropDownRounded,
   ShoppingCart,
 } from "@mui/icons-material";
 import Link from "@/components/__Shared/Link";
@@ -19,23 +18,8 @@ import { Avatar, Button, Divider, Menu, Paper, Tooltip } from "@mui/material";
 import SidebarList from "../Drawer";
 import NavbarLinks from "../NavbarLinks";
 import ChangeModeSwitch from "@/components/Atoms/ChangeModeSwitch";
-import MenuItem from "@/components/__Shared/MenuItem";
-import CategoryDropdown from "../CategoryDropdown";
 import CategoryDropdownList from "../CategoryDropdown";
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
 
 export default function Navbar() {
   const [profileDropdown, setProfileDropdown] =

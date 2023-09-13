@@ -1,7 +1,7 @@
-import MenuItem from '@/components/__Shared/MenuItem';
-import { Avatar, Divider, ListItemIcon, Menu } from '@mui/material';
-import React from 'react'
-import { INavbarLinks } from './NavbarLinks.types';
+import MenuItem from "@/components/__Shared/MenuItem";
+import { Avatar, Divider, ListItemIcon, Menu } from "@mui/material";
+import React from "react";
+import { INavbarLinks } from "./NavbarLinks.types";
 import {
   PersonAdd,
   Logout,
@@ -12,6 +12,7 @@ import {
   ShoppingBag,
   Login,
 } from "@mui/icons-material";
+import Link from "@/components/__Shared/Link";
 
 const NavbarLinks = ({ anchorEl, openMenu, handleCloseMenu }: INavbarLinks) => {
   return (
@@ -56,12 +57,14 @@ const NavbarLinks = ({ anchorEl, openMenu, handleCloseMenu }: INavbarLinks) => {
         </MenuItem>
 
         <Divider />
-        <MenuItem onClick={handleCloseMenu}>
-          <ListItemIcon>
-            <Login fontSize="small" />
-          </ListItemIcon>
-          Sign In
-        </MenuItem>
+        <Link href={"/auth/signin"}>
+          <MenuItem onClick={handleCloseMenu}>
+            <ListItemIcon>
+              <Login fontSize="small" />
+            </ListItemIcon>
+            Sign In
+          </MenuItem>
+        </Link>
         <MenuItem onClick={handleCloseMenu}>
           <ListItemIcon>
             <ShoppingBag fontSize="small" />
@@ -109,4 +112,4 @@ const NavbarLinks = ({ anchorEl, openMenu, handleCloseMenu }: INavbarLinks) => {
   );
 };
 
-export default NavbarLinks
+export default NavbarLinks;
