@@ -54,6 +54,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }: { theme: Theme }) => ({
 const ChangeModeSwitch = () => {
   const setTheme = useContext(SetThemeContext);
   const isDarkMode = useContext(IsDarkTheme);
+  const theme = useTheme();
+
   const handleChangeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (setTheme) {
       localStorage.setItem("theme", e.target.checked.toString());
@@ -63,14 +65,14 @@ const ChangeModeSwitch = () => {
 
   useEffect(() => {
     const rawTheme: string | null = localStorage.getItem("theme");
-    const getCurrentTheme: boolean = rawTheme ? JSON.parse(rawTheme) : false;
+    if (typeof rawTheme ==="string" && rawTheme === "light") {
+      localStorage.setItem("theme", "true");
+    }
+    const getCurrentTheme: boolean = rawTheme ? JSON?.parse(rawTheme) : false;
     if (setTheme) {
       setTheme(getCurrentTheme);
     }
   }, [setTheme]);
-
-
-  const theme = useTheme();
 
   return (
     <div>

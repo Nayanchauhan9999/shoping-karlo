@@ -5,19 +5,19 @@ import MenuItem from "@/components/__Shared/MenuItem";
 
 const options = [
   "None",
-  "Atria",
-  "Callisto",
-  "Dione",
-  "Ganymede",
-  "Hangouts Call",
-  "Luna",
-  "Oberon",
-  "Phobos",
-  "Pyxis",
-  "Sedna",
-  "Titania",
-  "Triton",
-  "Umbriel",
+  "Men",
+  "Woman",
+  "Shoes",
+  "Jeans",
+  "T-shirts",
+  "Tops",
+  "Electronics",
+  "Slippers",
+  "Books",
+  "Agriculture",
+  "Medicine",
+  "Drinks",
+  "Grocery",
 ];
 
 const CategoryDropdownList = ({

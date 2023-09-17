@@ -20,6 +20,7 @@ export default class ApiClient implements IApiClient {
       baseURL: process.env.NEXT_PUBLIC_API_LINK,
       headers: {
         "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
       },
     });
   }
@@ -27,26 +28,16 @@ export default class ApiClient implements IApiClient {
     this.client = this.createAxiosClient();
   }
   async get<TResponse>(path: string): Promise<TResponse> {
-    try {
-      const response = await this.client.get(path);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-    return {} as TResponse;
+    const response = await this.client.get(path);
+    return response.data;
   }
 
   async post<TRequest, TResponse>(
     path: string,
     reqBody: TRequest
   ): Promise<TResponse> {
-    try {
-      const response = await this.client.post(path, reqBody);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-    return {} as TResponse;
+    const response = await this.client.post(path, reqBody);
+    return response.data;
   }
 
   async patch<TRequest, TResponse>(
