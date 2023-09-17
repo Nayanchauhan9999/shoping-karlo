@@ -7,21 +7,21 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [loading, setLoading] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   getUsersList();
-  // }, []);
+  useEffect(() => {
+    getUsersList();
+  }, []);
 
-  // const getUsersList = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const getUsers = await new ApiClient().get("users");
-  //     console.log(getUsers)
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const getUsersList = async () => {
+    setLoading(true);
+    try {
+      const getUsers = await new ApiClient().get("products");
+      console.log(getUsers)
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <main>

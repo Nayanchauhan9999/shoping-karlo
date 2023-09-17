@@ -22,6 +22,7 @@ export default class ApiClient implements IApiClient {
         "Content-Type": "application/json",
         Authorization: localStorage.getItem("token"),
       },
+      withCredentials: true,
     });
   }
   constructor() {
