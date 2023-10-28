@@ -1,4 +1,6 @@
+"use client";
 import axios, { AxiosInstance } from "axios";
+import Router from "next/router";
 
 interface IApiClient {
   get<TResponse>(path: string): Promise<TResponse>;
@@ -20,7 +22,6 @@ export default class ApiClient implements IApiClient {
       baseURL: process.env.NEXT_PUBLIC_API_LINK,
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token"),
       },
       withCredentials: true,
     });
@@ -45,21 +46,11 @@ export default class ApiClient implements IApiClient {
     path: string,
     reqBody: TRequest
   ): Promise<TResponse> {
-    try {
-      const response = await this.client.patch(path, reqBody);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-    return {} as TResponse;
+    const response = await this.client.patch(path, reqBody);
+    return response.data;
   }
   async delete<TResponse>(path: string): Promise<TResponse> {
-    try {
-      const response = await this.client.delete(path);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-    return {} as TResponse;
+    const response = await this.client.delete(path);
+    return response.data;
   }
 }

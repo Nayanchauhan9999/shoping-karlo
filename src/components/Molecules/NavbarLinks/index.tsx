@@ -13,8 +13,21 @@ import {
   Login,
 } from "@mui/icons-material";
 import Link from "@/components/__Shared/Link";
+import ApiClient from "@/utils/http";
+import { useRouter } from "next/navigation";
 
 const NavbarLinks = ({ anchorEl, openMenu, handleCloseMenu }: INavbarLinks) => {
+  const router = useRouter();
+  const handleSignOut = async () => {
+    try {
+      await new ApiClient().get("/auth/signout");
+      localStorage.clear();
+      router.push("/auth/signin");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <React.Fragment>
       <Menu
@@ -101,7 +114,7 @@ const NavbarLinks = ({ anchorEl, openMenu, handleCloseMenu }: INavbarLinks) => {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>
+        <MenuItem onClick={handleSignOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
